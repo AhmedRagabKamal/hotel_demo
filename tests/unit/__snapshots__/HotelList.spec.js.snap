@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`HotelList HotelList render ok 1`] = `
+exports[`HotelList renders the component 1`] = `
 <div>
   <div class="container mb-5">
     <div class="row"></div>

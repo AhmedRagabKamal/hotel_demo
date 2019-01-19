@@ -1,12 +1,29 @@
-import { shallowMount } from '@vue/test-utils';
+import { mount, createLocalVue } from '@vue/test-utils';
+import Vuex from 'vuex';
 import HotelList from '@/views/hotel/HotelList.vue';
 import HotelListItem from '@/views/hotel/HotelListItem.vue';
+import initialState from '@/store/modules/hotel-store/state';
+import hotelsFixture from './fixtures/hotels';
+// import actions from '@/store/modules/hotel-store/actions';
+
+const localVue = createLocalVue();
+localVue.use(Vuex);
 
 describe('HotelList', () => {
+  let state;
+  let actions;
+
   const build = () => {
-    const wrapper = shallowMount(HotelList, {
+    const wrapper = mount(HotelList, {
       propsData: {
         nightsCount: 1,
+      },
+      localVue,
+      store: new Vuex.Store({ state, actions }),
+      methods: {
+        created: () => {
+          this.store.dispatch('hotel/getHotels');
+        },
       },
     });
     return {
@@ -15,32 +32,32 @@ describe('HotelList', () => {
     };
   };
 
-  it('HotelList render ok', () => {
+  beforeEach(() => {
+    actions = {
+      getHotels: jest.fn(),
+    };
+    state = { ...initialState };
+  });
+
+  it('renders the component', () => {
+    // arrange
     const { wrapper } = build();
+    // assert
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('renders main child component HotelListItem', () => {
-    // arrange
-    const { hotelListItem } = build();
-    // assert
-    expect(hotelListItem().exists()).toBe(true);
+  it('dispatches "getHotels" when component created', () => {
+    const { wrapper } = build();
+    wrapper.vm.created();
+    expect(actions.getHotels).toHaveBeenCalled();
   });
 
-  // it('passes a binded nightCounts prop to HotelListItem component', () => {
+
+  // it('get hotels data from state of  hotel-store', () => {
   //   // arrange
-  //   const days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  //   const { wrapper, hotelListItem } = build();
-  //   wrapper.setData({
-  //     nightsCount: 1,
-  //   });
+  //   const { wrapper } = build();
+  //   state.hotels = hotelsFixture;
   //   // assert
-  //   expect(hotelListItem().vm.nightsCount).toBe(wrapper.vm.nightsCount);
-  //   expect(wrapper.vm.nightsCount).not.toBeUndefined();
-  //   expect(wrapper.vm.nightsCount).toBeDefined();
-  //   expect(wrapper.vm.nightsCount).toBeTruthy();
-  //   expect(days).toContain(wrapper.vm.nightsCount);
+  //   expect(wrapper.vm.hotels).toBe(state.hotels);
   // });
-
-
 });

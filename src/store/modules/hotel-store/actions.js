@@ -2,7 +2,6 @@ import axios from '../../../authorizedAxios';
 
 export default {
   getHotels({ commit }) {
-    console.log('inside get hotel action');
     axios.get('/hotels').then((response) => {
       commit('updateHotels', response.data);
     }, error => console.log(error));

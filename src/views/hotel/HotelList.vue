@@ -12,6 +12,8 @@
 
 <script>
 import HotelListItem from './HotelListItem.vue';
+import { mapState } from 'vuex';
+
 export default {
   name: 'HotelList',
   props: {
@@ -25,9 +27,9 @@ export default {
     this.$store.dispatch('hotel/getHotels');
   },
   computed: {
-    hotels() {
-      return this.$store.state.hotel.hotels;
-    }
+    ...mapState({
+      hotels: state => state.hotel.hotels,
+    })
   },
   components: {
     HotelListItem,

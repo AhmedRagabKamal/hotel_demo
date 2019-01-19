@@ -119,9 +119,6 @@ export default {
   components: {
     PaginationComponent,
   },
-  mounted() {
-    console.log(this.pageNumber);
-  }
 };
 </script>
 
