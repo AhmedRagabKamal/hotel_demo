@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HotelPage renders the component 1`] = `
+<div>
+  <hotel-list-stub nightscount="1"></hotel-list-stub>
+  <hotel-details-stub></hotel-details-stub>
+</div>
+`;
