@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Actions.vue render component 1`] = `
+<div class="col-sm-4">
+  <div class="card" style="width: 18rem;">
+    <div class="card-body text-left"><button class="btn btn-link"></button>
+      <div class="row">
+        <div class="col-sm-5"><img class="img-thumbnail"></div>
+        <div class="col-sm-7">
+          <ul class="list-unstyled">
+            <li>$ NaN for 1 night</li>
+            <li>
+              <span>Accepted</span></li>
+            <li> reviews</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

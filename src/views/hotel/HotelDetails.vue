@@ -16,7 +16,7 @@
         </form>
       </div>
       <div class="col-sm-12">
-        <img :src="selectedPhoto" width="100">
+        <img :src="selectedPhoto" width="200">
       </div>
       <div class="col-sm-12">
         <div class="row galary-container">
@@ -47,7 +47,7 @@
             </tr>
           </thead>
           <tbody v-if="paginatedData && paginatedData.length > 0">
-            <tr v-for="review in paginatedData" :key="review.id + 'dddd'">
+            <tr v-for="review in paginatedData" :key="review.id">
               <td>{{review.id}}</td>
               <td class="text-left">{{review.review}}</td>
             </tr>
@@ -135,8 +135,8 @@ export default {
   border: 2px solid;
   min-height: 400px;
   .galary-container {
-    max-width: 500px;
-    height: 100px;
+    max-width: 600px;
+    max-height: 110px;
     overflow-x: auto;
     margin: 30px auto;
   }

@@ -8,13 +8,13 @@
             <span aria-hidden="true">&laquo;</span>
           </button>
         </li>
-        <li class="page-item" :class="{active: index  === pageNumber}"
+        <li class="page-item" :class="{'active': index  === pageNumber}"
           v-for="(page, index) in numberOfPages" :key="index">
           <button class="page-link"
             @click="setCurrentPage(index)">{{index + 1}}</button>
         </li>
         <li class="page-item">
-          <button class="page-link" aria-label="Next"
+          <button class="page-link next" aria-label="Next"
           @click="nextPage"
           :disabled="pageNumber >= numberOfPages - 1">
             <span aria-hidden="true">&raquo;</span>
@@ -49,6 +49,8 @@ const props = {
   },
   reviews: {
     type: Array,
+    require: true,
+    default: () => [],
   },
 };
 
@@ -57,18 +59,15 @@ export default {
   data() {
     return {
       pageNumber: 0,
+      reviewLength: 0,
     };
   },
   props,
   computed: {
     numberOfPages() {
       const result = Math.ceil(sanitizeTotalRows(this.reviews.length) / sanitizePerPage(this.perPage));
+      this.reviewLength = result;
       return result < 1 ? 1 : result;
-    },
-    pageCount(){
-      let l = this.reviews.length,
-          s = this.perPage;
-      return Math.ceil(l/s);
     },
   },
   methods:{
@@ -86,6 +85,15 @@ export default {
     setCurrentPage(currentPage) {
       this.pageNumber = currentPage;
       this.emitPageNumber();
+    },
+  },
+  watch: {
+    // this is not efficient way to that
+    // to reset the page number from list to another
+    reviewLength(newValue, oldValue) {
+     if(newValue !== oldValue) {
+       this.pageNumber = 0;
+     }
     },
   },
 }
