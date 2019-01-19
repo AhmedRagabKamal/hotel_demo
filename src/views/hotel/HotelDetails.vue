@@ -19,15 +19,12 @@
         <img :src="selectedPhoto" width="200">
       </div>
       <div class="col-sm-12">
-        <div class="row galary-container">
+        <div class="row">
           <ul class="list-unstyled images">
             <li v-for="(picture, index) in hotelDetails.pictures" :key="index">
               <img @click="getSelectedPhoto(picture)" :src="picture.thumbnail">
             </li>
           </ul>
-          <!-- <div class="mr-3 mb-3" v-for="(picture, index) in hotelDetails.pictures" :key="index">
-            <img @click="getSelectedPhoto(picture)" :src="picture.thumbnail">
-          </div> -->
         </div>
       </div>
       <div class="col-sm-12">
@@ -73,14 +70,15 @@
 </template>
 
 <script>
-import PaginationComponent from "../../shared/components/PaginationComponent.vue";
+import PaginationComponent from '../../shared/components/PaginationComponent.vue';
+
 export default {
-  name: "HotelDetails",
+  name: 'HotelDetails',
   data() {
     return {
       night_count: 1,
       days: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-      selectedPhoto: "",
+      selectedPhoto: '',
       perPage: 3,
       pageNumber: 0,
       sortReviews: '',
@@ -88,33 +86,30 @@ export default {
   },
   computed: {
     hotelDetails() {
-      this.pageNumber = 0;
-      this.perPage = 3;
+      const vm = this;
+      vm.pageNumber = 0;
+      vm.perPage = 3;
       const hotel = this.$store.state.hotel.hotelDetails;
       if (hotel) {
-         // set the first photo
-        this.selectedPhoto = hotel.pictures[0].photo;
-        return hotel;
+        // set the first photo
+        vm.selectedPhoto = hotel.pictures[0].photo;
       }
+      return hotel;
     },
     paginatedData() {
-      const start = this.pageNumber * this.perPage,
-        end = start + this.perPage;
-      let reviews = this.hotelDetails.reviews.map((item, index) => {
-          return { ...item, id: index + 1 };
-        });
-        reviews = reviews.slice(start, end);
-        if(this.sortReviews) {
-          reviews.sort((a, b) => {
-            return this.sortReviews === "ascend" ? a.score - b.score : b.score - a.score;
-          })
-        }
+      const start = this.pageNumber * this.perPage;
+      const end = start + this.perPage;
+      let reviews = this.hotelDetails.reviews.map((item, index) => ({ ...item, id: index + 1 }));
+      reviews = reviews.slice(start, end);
+      if (this.sortReviews) {
+        reviews.sort((a, b) => (this.sortReviews === 'ascend' ? a.score - b.score : b.score - a.score));
+      }
       return reviews;
-    }
+    },
   },
   methods: {
     updateNightCount(nightCount) {
-      this.$emit("updateNightCount", nightCount);
+      this.$emit('updateNightCount', nightCount);
     },
     getSelectedPhoto(picture) {
       this.selectedPhoto = picture.photo;
@@ -136,7 +131,7 @@ export default {
 }
 
 .hotel-details {
-  border: 2px solid;
+  border: 2px solid #ccc;
   min-height: 400px;
   ul.images {
   margin: 20px auto;

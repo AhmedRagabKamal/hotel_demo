@@ -21,7 +21,7 @@ export default {
     HotelList,
     HotelDetails,
   },
-}
+};
 </script>
 
 <style>

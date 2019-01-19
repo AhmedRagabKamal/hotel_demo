@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <div class="container mb-5">
-      <div class="row">
-        <hotel-list-item v-for="(hotel, index) in hotels"
-         :key="index" :hotel="hotel" :nightsCount="nightsCount">
-        </hotel-list-item>
-      </div>
+  <div class="container mb-5">
+    <div class="row">
+      <hotel-list-item v-for="(hotel, index) in hotels"
+        :key="index" :hotel="hotel" :nightsCount="nightsCount">
+      </hotel-list-item>
     </div>
   </div>
 </template>

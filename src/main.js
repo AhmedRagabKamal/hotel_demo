@@ -4,13 +4,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import NProgress from 'nprogress';
 import App from './App.vue';
 import store from './store/store';
 
 library.add(faCaretUp, faCaretDown);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
-Vue.use(NProgress);
 
 Vue.config.productionTip = false;
 
