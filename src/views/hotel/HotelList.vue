@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import HotelListItem from './HotelListItem.vue';
 import { mapState } from 'vuex';
+import HotelListItem from './HotelListItem.vue';
 
 export default {
   name: 'HotelList',
@@ -29,12 +29,12 @@ export default {
   computed: {
     ...mapState({
       hotels: state => state.hotel.hotels,
-    })
+    }),
   },
   components: {
     HotelListItem,
   },
-}
+};
 </script>
 
 <style>

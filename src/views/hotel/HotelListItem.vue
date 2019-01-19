@@ -1,6 +1,6 @@
 <template>
   <div class="col-sm-4">
-    <div class="card" style="width: 18rem;">
+    <div class="card mb-3">
       <div class="card-body text-left">
         <button @click="getHotelDetail(hotel.id)"
          class="btn btn-link">{{hotel.name}}</button>
@@ -55,6 +55,6 @@ import grade from '../../shared/directives/grade-directive';
 
 </script>
 
-<style>
+<style scoped lang="scss">
 
 </style>

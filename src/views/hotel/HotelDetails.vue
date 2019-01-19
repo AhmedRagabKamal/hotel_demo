@@ -20,9 +20,14 @@
       </div>
       <div class="col-sm-12">
         <div class="row galary-container">
-          <div class="mr-3 mb-3" v-for="(picture, index) in hotelDetails.pictures" :key="index">
+          <ul class="list-unstyled images">
+            <li v-for="(picture, index) in hotelDetails.pictures" :key="index">
+              <img @click="getSelectedPhoto(picture)" :src="picture.thumbnail">
+            </li>
+          </ul>
+          <!-- <div class="mr-3 mb-3" v-for="(picture, index) in hotelDetails.pictures" :key="index">
             <img @click="getSelectedPhoto(picture)" :src="picture.thumbnail">
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="col-sm-12">
@@ -34,13 +39,12 @@
                 Reviews
                 <div class="absolute sort-icons">
                   <span @click="sortReviews = 'ascend'"
-                  :class="{'active-sort' : sortReviews === 'ascend'}"
-                  style="cursor:pointer">
-                    <font-awesome-icon icon="caret-up"/>
+                  :class="{'active-sort' : sortReviews === 'ascend'}">
+                    <font-awesome-icon icon="caret-up" size="lg"/>
                   </span>
-                  <span class="absolute descend" @click="sortReviews = 'descend'" style="cursor:pointer"
+                  <span class="absolute descend" @click="sortReviews = 'descend'"
                   :class="{'active-sort' : sortReviews === 'descend'}">
-                    <font-awesome-icon icon="caret-down"/>
+                    <font-awesome-icon icon="caret-down" size="lg"/>
                   </span>
                 </div>
               </th>
@@ -134,18 +138,32 @@ export default {
 .hotel-details {
   border: 2px solid;
   min-height: 400px;
-  .galary-container {
-    max-width: 600px;
-    max-height: 110px;
-    overflow-x: auto;
-    margin: 30px auto;
+  ul.images {
+  margin: 20px auto;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  width: 900px;
+  overflow-x: auto;
+  li {
+    cursor: pointer;
   }
+}
+
+ul.images li {
+  flex: 0 0 auto;
+  width: 150px;
+  height: 150px;
+}
   .sort-icons {
     left: 90px;
     top: 9px;
     z-index: 99;
+    span {
+      cursor: pointer;
+    }
     .descend {
-      bottom: -10px;
+      bottom: -14px;
       left: 0;
     }
   }
